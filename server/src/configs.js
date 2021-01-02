@@ -6,6 +6,7 @@ const express = require('express');
 const ctrl = require('./controllers/controllers');
 const app = express();
 const router = express.Router();
+
 //MiddleWares
 app.use(cors());
 app.use(express.json({encoding:true}));
