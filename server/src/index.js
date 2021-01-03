@@ -1,20 +1,25 @@
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const express = require('express');
+const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+const express = require("express");
 
-const router = require('./routes');
+const router = require("./routes");
 
 //configs
 let PORT = process.env.PORT || 4000;
 const app = express();
 
 //MiddleWares
-app.use(cors());
-app.use(express.json({encoding:true}));
+app.use(cors({
+  origin: 'http://localhost'
+}));
+app.use(express.json({ encoding: true }));
 app.use(helmet());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
+app.use("/public", express.static(__dirname + "/public"));
 
+//Routes
 app.use(router);
+
 app.listen(PORT, () => console.log("Runing on Port", PORT));

@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const router = express.Router();
 
@@ -10,7 +11,16 @@ router.post("/vehicle", async (req, res) => {
   }
   const price = await req.body.price.toString();
   const description = await req.body.description;
-  newVehicle(price, description);
+  //Create Ad
+  await newVehicle(price, description);
+
+  return res
+    .json({
+      status: "Published",
+      message: "You Ad is Published",
+      image: "/public/uploads/image.jpg",
+    })
+    .status(201);
 });
 
 module.exports = router;
