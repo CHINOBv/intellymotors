@@ -1,8 +1,29 @@
 require("dotenv").config();
 
+const path = require("path");
+
 const puppeteer = require("puppeteer");
-let email = `${process.env.EMAIL}`;
+let email = process.env.EMAIL;
 let password = process.env.PASSWORD;
+
+const selectors = {
+  type: "#dropdown_types > div > div > ul > li:nth-child(1) > a",
+  mark: "#dropdown_brands > div > div > ul > li:nth-child(1) > a",
+  model: "#dropdown_models > div > div > ul > li:nth-child(2) > a",
+  subType: "#dropdown_subtypes > div > div > ul > li:nth-child(4) > a",
+  year: "#dropdown_years > div > div > ul > li:nth-child(5) > a",
+  state: "#dropdown_provinces > div > div > ul > li:nth-child(19) > a",
+  city: "#dropdown_cities > div > div > ul > li:nth-child(52) > a",
+  travel: "#input_recorrido",
+  phone: "#input_teléfono",
+  transaction: "#dropdown_negotiable > div > div > ul > li:nth-child(2) > a",
+};
+
+const images = [
+  path.resolve("src/images/1.jpg"),
+  path.resolve("src/images/2.jpg"),
+  path.resolve("src/images/3.jpg"),
+];
 
 //Actions
 const login = async (page) => {
@@ -19,80 +40,83 @@ const login = async (page) => {
   await page.goto("https://www.seminuevos.com/wizard");
 };
 
-const selectors = {
-  mark: "#dropdown_brands > div > div > ul > li:nth-child(1) > a",
-  model: "#dropdown_models > div > div > ul > li:nth-child(2) > a",
-  subType: "#dropdown_subtypes > div > div > ul > li:nth-child(4) > a",
-  year: "#dropdown_years > div > div > ul > li:nth-child(5) > a",
-  state: "#dropdown_provinces > div > div > ul > li:nth-child(19) > a",
-  city: "#dropdown_cities > div > div > ul > li:nth-child(52) > a",
-  travel: "#input_recorrido",
-  phone: "#input_teléfono",
-  price: "#input_precio",
-};
-
 const selectField = async ({ selector, page }) => {
   const selectorId = await page.$(selector);
   await selectorId.evaluate((selector) => selector.click());
 };
 
 const autoFill = async (page) => {
+  await page.waitForTimeout(2000);
+
+  /* //Select Type
+  await page.waitForSelector(selectors.type);
+  await selectField({
+    selector: selectors.type,
+    page,
+  }) */
+
   //Select Mark
-  await page.waitForTimeout(1500);
   await selectField({
     selector: selectors.mark,
     page,
   });
 
   //Slect Model
-  await page.waitForTimeout(1000);
+  await page.waitForSelector(selectors.model);
   await selectField({
     selector: selectors.model,
     page,
   });
 
   //Select Sub Type
-  await page.waitForTimeout(250);
+  await page.waitForSelector(selectors.subType);
   await selectField({
     selector: selectors.subType,
     page,
   });
 
   //Select Year
-  await page.waitForTimeout(250);
+
+  await page.waitForSelector(selectors.year);
   await selectField({
     selector: selectors.year,
     page,
   });
 
   //Select State
-  await page.waitForTimeout(250);
+
+  await page.waitForSelector(selectors.state);
   await selectField({
     selector: selectors.state,
     page,
   });
 
   //Select City
-  await page.waitForTimeout(250);
+
+  await page.waitForSelector(selectors.city);
   await selectField({
     selector: selectors.city,
     page,
   });
 
   //Type Travel
-  await page.waitForTimeout(500);
+
+  await page.waitForSelector(selectors.travel);
   await page.type(selectors.travel, "20000");
 
-  //Type Phone
-  await page.waitForTimeout(900);
-  await page.type(selectors.phone, "8126057489");
+  /* //Select Type Transaction
+  await page.waitForSelector(selectors.transaction);
+  await selectField({
+    selector: selectors.transaction,
+    page,
+  }) */
 };
 
 const newVehicle = async (price, description) => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
-  await page.setViewport({ width: 1366, height: 768 });
+  await page.setViewport({ width: 1920, height: 1080 });
   await page.setUserAgent(
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
   );
@@ -100,9 +124,36 @@ const newVehicle = async (price, description) => {
   await login(page);
   await autoFill(page);
 
-  await page.waitForTimeout(500)
-  await page.type(selectors.price, price);
+  //Type Price from Request of the API
+  await page.type("#input_precio", price);
+  await page.click("#wizard > div > div > div > div > div > button");
 
+  //Type Description from Request API
+  await page.waitForSelector("#input_text_area_review");
+  await page.type("#input_text_area_review", description);
+
+  //Upload Images
+  await page.waitForSelector("#Uploader");
+  const uploader = await page.$("#Uploader");
+
+  for (let i = 0; i < images.length; i++) {
+    await page.waitForTimeout(1500);
+    await uploader.uploadFile(images[i]);
+  }
+
+  //Next Step
+  await page.click(
+    "#wizard > div > div > div > div > div > button:nth-child(2)"
+  );
+
+  await page.waitForNavigation({ waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(2500);
+  await page.click("#cancelButton");
+  await page.screenshot({
+    path: "src/screenshots/ss.jpg",
+    fullPage: true,
+    quality: 100,
+  });
 };
 
 module.exports = newVehicle;
