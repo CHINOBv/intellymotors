@@ -100,7 +100,7 @@ const autoFill = async (page) => {
 
 const newVehicle = async (price, description) => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: ["--no-sandbox"],
   });
   try {
@@ -145,10 +145,9 @@ const newVehicle = async (price, description) => {
       quality: 100,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
   } finally {
     await browser.close();
-    console.log("END");
   }
 };
 

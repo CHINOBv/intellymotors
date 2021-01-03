@@ -1,36 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import PublicNewCarContext from "../../context/CreateNewCarContext";
+import AlertContext from "../../context/StatusContext";
+
+import PublicButton from "./PublicButton";
+
 import {
   Avatar,
-  Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
-  Grid,
-  Box,
   Typography,
   Container,
-  Input,
 } from "@material-ui/core";
 
 import DriveEtaOutlinedIcon from "@material-ui/icons/DriveEtaOutlined";
-import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
 
 import { makeStyles } from "@material-ui/core/styles";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,22 +32,23 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(1),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: "#36b6ff",
-  },
   price: {
     width: "50%",
   },
   container: {
     backgroundColor: "#fff",
     borderRadius: 3,
+    height: "320px",
   },
 }));
 
 const Form = () => {
-  const classes = useStyles();
+  const { price, setPrice, description, setDescription } = useContext(
+    PublicNewCarContext
+  );
+  const { isLoading } = useContext(AlertContext);
 
+  const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
       <CssBaseline />
@@ -84,8 +70,13 @@ const Form = () => {
             variant="filled"
             margin="normal"
             placeholder="40000"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            disabled={isLoading}
           />
           <TextField
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             id="description"
             label="Agrega tu Descripcion"
             placeholder="Nuevo, en Excelente Estado..."
@@ -93,19 +84,10 @@ const Form = () => {
             variant="filled"
             fullWidth
             margin="normal"
+            disabled={isLoading}
           />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            startIcon={<PublishOutlinedIcon/>}
-            
-          >
-            Publicar
-          </Button>
+          <PublicButton />
         </form>
       </div>
     </Container>

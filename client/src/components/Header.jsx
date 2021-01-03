@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <AppBar position="static" className={classes.barStyle}>
       <Toolbar>
-        <Link href='/'  >
+        <Link href="/">
           <img
             src="https://app.intelimotor.com/logo.png"
             alt="logo"

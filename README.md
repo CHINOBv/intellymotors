@@ -31,6 +31,7 @@ Express, Puppeteer
 FrontEnd: ReactJS
 
 ## Creado por: David Israel Moreno Resendez
+No suelo dejar el archivo .env con las variables de entorno, solo las deje en esta ocacion con la finalidad de que sea mas rapido probar el codigo
 
 ## License
 

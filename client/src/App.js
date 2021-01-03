@@ -1,8 +1,12 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 
-import Form from "./components/Form";
+import { NewCarProvider } from "./context/CreateNewCarContext";
+import { StatusContextProvider } from "./context/StatusContext";
+
+import Form from "./components/form/Form";
 import Header from "./components/Header";
+
+import AlertMessage from "./components/AlertMessage";
 
 const useStyles = makeStyles({
   ctn: {
@@ -16,14 +20,17 @@ function App() {
   const classes = useStyles();
 
   return (
-    <Router>
+    <>
       <div className={classes.ctn}>
         <Header />
-        <Switch>
-          <Route exact path="/" component={() => <Form />} />
-        </Switch>
+        <NewCarProvider>
+          <StatusContextProvider>
+            <AlertMessage/>
+            <Form />
+          </StatusContextProvider>
+        </NewCarProvider>
       </div>
-    </Router>
+    </>
   );
 }
 
