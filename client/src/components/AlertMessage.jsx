@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import { IconButton, Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/CloseOutlined";
+import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
+import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 
 //Context Imports
 import AlertContext from "../context/StatusContext";
@@ -38,9 +40,16 @@ const AlertMessage = () => {
     <div className={classes.root}>
       <Collapse in={showAlert}>
         <Alert
+          icon={
+            alertInfo.typeAlert === "error" ? (
+              <ErrorOutlineOutlinedIcon />
+            ) : (
+              <CheckCircleOutlineOutlinedIcon />
+            )
+          }
           className={classes.alert}
           variant="filled"
-          color={alertInfo.typeAlert ? alertInfo.typeAlert : 'success'}
+          color={alertInfo.typeAlert ? alertInfo.typeAlert : "success"}
           action={
             <IconButton
               aria-label="close"

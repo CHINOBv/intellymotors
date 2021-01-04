@@ -24,6 +24,8 @@ const useStyles = makeStyles({
     justifyItems: "start",
     alignItems: "start",
     alignContent: "center",
+    minHeight: 312,
+    height: "auto",
   },
 });
 

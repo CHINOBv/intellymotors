@@ -12,6 +12,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
+import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 
 //Context
 import PublicNewCarContext from "../context/CreateNewCarContext";
@@ -22,6 +23,7 @@ import ImageFullView from "./ImageFullView";
 const useStyles = makeStyles({
   root: {
     width: "100%",
+    height: 312,
   },
   media: {
     height: 140,
@@ -69,6 +71,7 @@ const Image = () => {
                 size="small"
                 color="primary"
                 onClick={() => setOpenImage(!openImage ? true : false)}
+                startIcon={<VisibilityOutlinedIcon />}
               >
                 Ver Imagen Completa
               </Button>

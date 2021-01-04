@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     borderRadius: 3,
     height: "auto",
+    minHeight: 312,
   },
 }));
 
