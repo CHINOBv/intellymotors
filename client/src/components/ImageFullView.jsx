@@ -41,7 +41,13 @@ const ImageFullView = ({ setOpenImage, openImage, image }) => {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogContent>
-        <a href={image} download onClick={(e) => download(e)}>
+        <a
+          href={image}
+          download
+          onClick={(e) => download(e)}
+          target="_blank"
+          rel="noreferrer"
+        >
           <img src={image} alt="fullview" style={{ width: "100%" }} />
         </a>
       </DialogContent>
