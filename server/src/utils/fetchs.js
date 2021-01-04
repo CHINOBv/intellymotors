@@ -102,6 +102,7 @@ const newVehicle = async (price, description) => {
   const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox"],
+    executablePath: "/usr/bin/chromium-browser",
   });
   try {
     const page = await browser.newPage();
