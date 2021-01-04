@@ -10,7 +10,9 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "60%",
+    width: "50%",
+    minWidth: 300,
+    padding: "15px auto",
     margin: "auto",
     "& > * + *": {
       marginTop: theme.spacing(2),
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   alert: {
     marginTop: "10px",
+    marginBottom: "10px",
   },
 }));
 
@@ -35,7 +38,7 @@ const AlertMessage = () => {
         <Alert
           className={classes.alert}
           variant="filled"
-          color={alertInfo.alertType}
+          color={alertInfo.typeAlert}
           action={
             <IconButton
               aria-label="close"

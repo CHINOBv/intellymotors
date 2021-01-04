@@ -7,12 +7,22 @@ import Form from "./components/form/Form";
 import Header from "./components/Header";
 
 import AlertMessage from "./components/AlertMessage";
+import Image from "./components/Image";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
-  ctn: {
-    backgroundColor: "#222222",
-    width: "100%",
-    height: "100vh",
+  root: {
+    minWidth: "100%",
+    maxWidth: "100%",
+
+    overflow: "hidden",
+  },
+  container: {
+    padding: "15px",
+    justifyContent: "start",
+    justifyItems: "start",
+    alignItems: "start",
+    alignContent: "center",
   },
 });
 
@@ -21,12 +31,27 @@ function App() {
 
   return (
     <>
-      <div className={classes.ctn}>
+      <div className={classes.root}>
         <Header />
         <NewCarProvider>
           <StatusContextProvider>
-            <AlertMessage/>
-            <Form />
+            <div className={classes.container}>
+              <AlertMessage />
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                alignContent="center"
+                wrap="wrap"
+              >
+                <Grid item md={4} sm>
+                  <Form />
+                </Grid>
+                <Image />
+              </Grid>
+            </div>
           </StatusContextProvider>
         </NewCarProvider>
       </div>

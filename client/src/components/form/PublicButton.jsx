@@ -36,7 +36,24 @@ const PublicButton = () => {
   const fetchAPI = async (e) => {
     e.preventDefault();
 
-    if (!price && !description) return;
+    console.log(description);
+    if (price <= 0 && description.trim() === "") {
+      setShowAlert(true);
+      setAlertInfo({
+        message: "Todos los campos son Requeridos",
+        typeAlert: "error",
+        title: "Error",
+      });
+      setTimeout(() => {
+        setShowAlert(false);
+        setAlertInfo({
+          message: "",
+          typeAlert: "",
+          title: "",
+        });
+      }, 5000);
+      return;
+    }
 
     if (showAlert) {
       setShowAlert(false);
@@ -49,9 +66,24 @@ const PublicButton = () => {
 
     setIsLoading(true);
     const response = await publicNewCar(price, description);
-    if (!response.data) {
+    if (!response) {
+      setShowAlert(true);
+      setAlertInfo({
+        message: "Hemos tenido un error, porfavor intentalo otra vez",
+        typeAlert: "error",
+        title: "Error",
+      });
+      setTimeout(() => {
+        setShowAlert(false);
+        setAlertInfo({
+          message: "",
+          typeAlert: "",
+          title: "",
+        });
+      }, 5000);
+      return;
     }
-    setImage(response.data.image);
+    setImage(response);
     setIsLoading(false);
     setShowAlert(true);
     setAlertInfo({

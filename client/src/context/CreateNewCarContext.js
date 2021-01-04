@@ -4,7 +4,7 @@ const Context = createContext({});
 export default Context;
 
 export const NewCarProvider = ({ children }) => {
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(null);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);

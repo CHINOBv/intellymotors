@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   barStyle: {
     backgroundColor: "#318dc3",
+    width: "100%",
+    
   },
 });
 

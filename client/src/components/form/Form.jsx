@@ -19,7 +19,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   price: {
-    width: "50%",
+    textAlign: "center"
   },
   container: {
     backgroundColor: "#fff",
     borderRadius: 3,
-    height: "320px",
+    height: "auto",
   },
 }));
 
@@ -73,6 +73,7 @@ const Form = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             disabled={isLoading}
+            
           />
           <TextField
             value={description}
