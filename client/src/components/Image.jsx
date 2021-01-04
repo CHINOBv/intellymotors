@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 
 const Image = () => {
   const [openImage, setOpenImage] = useState(false);
-  const { image } = useContext(PublicNewCarContext);
+  const { image, price, description } = useContext(PublicNewCarContext);
 
   const classes = useStyles();
 
@@ -91,10 +91,13 @@ const Image = () => {
               <DialogContent>
                 <a href={image.image} target="_blank" rel="noreferrer">
                   <img
-                    src={image.image ? image.image : ''}
+                    src={
+                      image.image
+                        ? `${image.image}?${price}?${description}`
+                        : ""
+                    }
                     alt="fullview"
                     style={{ width: "100%" }}
-                    source={{url: image.image}}
                   />
                 </a>
               </DialogContent>

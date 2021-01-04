@@ -1,6 +1,7 @@
 //Core Imports
 import { useContext } from "react";
 
+
 //Styles Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, CircularProgress } from "@material-ui/core";
@@ -69,12 +70,10 @@ const PublicButton = () => {
     }
 
     setIsLoading(true);
-    setImage({
-      image: "",
-    });
+    setImage({});
     await publicNewCar(price, description)
       .then((response) => {
-        setImage(response);
+        setImage(response)
         setShowAlert(true);
         setAlertInfo({
           message: "Anuncio Publicado!",

@@ -143,14 +143,12 @@ const newVehicle = async (price, description) => {
     await page.click("#cancelButton");
     const path = `src/public/uploads/`;
     try {
-      fs.unlinkSync(path+'/image.jpg');
       await page.screenshot({
         path: `${path}/image.jpg`,
         fullPage: true,
         quality: 100,
       });
     } catch (e) {
-      fs.unlinkSync(path+'/image.jpg');
       fs.mkdirSync(path);
       await page.screenshot({
         path: `${path}/image.jpg`,
