@@ -23,7 +23,9 @@ import ImageFullView from "./ImageFullView";
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    height: 312,
+    height: 'auto',
+    minHeight: 312,
+    padding: 'auto'
   },
   media: {
     height: 140,
