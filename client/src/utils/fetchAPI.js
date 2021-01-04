@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let URL = "http://localhost:4000";
+let URL = "http://167.172.246.172:4000";
 
 export const publicNewCar = async (priceReq, descriptionReq) => {
   return await axios
