@@ -139,7 +139,7 @@ const newVehicle = async (price, description) => {
     );
 
     await page.waitForNavigation({ waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(3500);
     await page.click("#cancelButton");
     const path = `src/public/uploads/`;
     try {
