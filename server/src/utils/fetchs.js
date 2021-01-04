@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require("fs");
 
 const path = require("path");
 
@@ -102,7 +103,7 @@ const newVehicle = async (price, description) => {
   const browser = await puppeteer.launch({
     headless: true,
     args: ["--no-sandbox"],
-    executablePath: "/usr/bin/chromium-browser",
+    // Solo si es necesario : executablePath: "/usr/bin/chromium-browser",
   });
   try {
     const page = await browser.newPage();
@@ -140,11 +141,23 @@ const newVehicle = async (price, description) => {
     await page.waitForNavigation({ waitUntil: "domcontentloaded" });
     await page.waitForTimeout(2500);
     await page.click("#cancelButton");
-    await page.screenshot({
-      path: "src/public/uploads/image.jpg",
-      fullPage: true,
-      quality: 100,
-    });
+    const path = `src/public/uploads/`;
+    try {
+      fs.unlinkSync(path+'/image.jpg');
+      await page.screenshot({
+        path: `${path}/image.jpg`,
+        fullPage: true,
+        quality: 100,
+      });
+    } catch (e) {
+      fs.unlinkSync(path+'/image.jpg');
+      fs.mkdirSync(path);
+      await page.screenshot({
+        path: `${path}/image.jpg`,
+        fullPage: true,
+        quality: 100,
+      });
+    }
   } catch (e) {
     console.error(e);
   } finally {

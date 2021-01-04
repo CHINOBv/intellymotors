@@ -69,10 +69,12 @@ const PublicButton = () => {
     }
 
     setIsLoading(true);
+    setImage({
+      image: "",
+    });
     await publicNewCar(price, description)
       .then((response) => {
         setImage(response);
-
         setShowAlert(true);
         setAlertInfo({
           message: "Anuncio Publicado!",

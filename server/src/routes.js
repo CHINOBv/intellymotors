@@ -9,7 +9,7 @@ router.post("/vehicle", async (req, res) => {
   if (!req.body) {
     return res.send("All Fields Is Required").status(500).end();
   }
-  const price = await req.body.price.toString();
+  const price = await req.body.price;
   const description = await req.body.description;
   //Create Ad
   await newVehicle(price, description);
