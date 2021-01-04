@@ -14,14 +14,16 @@ router.post("/vehicle", async (req, res) => {
   //Create Ad
   await newVehicle(price, description);
 
-
   return res
     .json({
       status: "Published",
       message: "You Ad is Published",
       image: "/public/uploads/image.jpg",
+      price,
+      description,
     })
-    .status(201).end();
+    .status(201)
+    .end();
 });
 
 module.exports = router;

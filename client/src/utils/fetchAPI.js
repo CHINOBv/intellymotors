@@ -2,14 +2,16 @@ import axios from "axios";
 
 let URL = "http://localhost:4000";
 
-export const publicNewCar = async (price, description) => {
+export const publicNewCar = async (priceReq, descriptionReq) => {
   let response = await axios.post(`${URL}/vehicle`, {
     headers: {
       "Content-Type": "application/json",
     },
 
-    price: price,
-    description: description,
+    price: priceReq,
+    description: descriptionReq,
   });
-  return URL + response.data.image;
+  const { image, price, description } = await response.data;
+
+  return { image: URL + image, price, description };
 };

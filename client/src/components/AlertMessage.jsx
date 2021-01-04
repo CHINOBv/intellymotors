@@ -1,12 +1,14 @@
+//Core Imports
 import { useContext } from "react";
 
-import AlertContext from "../context/StatusContext";
-
+//Styles Imports
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
-import IconButton from "@material-ui/core/IconButton";
-import Collapse from "@material-ui/core/Collapse";
-import CloseIcon from "@material-ui/icons/Close";
+import { IconButton, Collapse } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/CloseOutlined";
+
+//Context Imports
+import AlertContext from "../context/StatusContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +40,7 @@ const AlertMessage = () => {
         <Alert
           className={classes.alert}
           variant="filled"
-          color={alertInfo.typeAlert}
+          color={alertInfo.typeAlert ? alertInfo.typeAlert : 'success'}
           action={
             <IconButton
               aria-label="close"

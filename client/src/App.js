@@ -1,20 +1,21 @@
+//Styles Imports
 import { makeStyles } from "@material-ui/styles";
+import Grid from "@material-ui/core/Grid";
 
+//Context Imports
 import { NewCarProvider } from "./context/CreateNewCarContext";
 import { StatusContextProvider } from "./context/StatusContext";
 
+//Components Imports
 import Form from "./components/form/Form";
 import Header from "./components/Header";
-
 import AlertMessage from "./components/AlertMessage";
 import Image from "./components/Image";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
     minWidth: "100%",
     maxWidth: "100%",
-
     overflow: "hidden",
   },
   container: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-function App() {
+const App = () => {
   const classes = useStyles();
 
   return (
@@ -46,9 +47,7 @@ function App() {
                 alignContent="center"
                 wrap="wrap"
               >
-                <Grid item md={4} sm>
-                  <Form />
-                </Grid>
+                <Form />
                 <Image />
               </Grid>
             </div>
@@ -57,6 +56,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;

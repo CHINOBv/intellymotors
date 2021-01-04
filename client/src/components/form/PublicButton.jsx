@@ -1,15 +1,19 @@
+//Core Imports
 import { useContext } from "react";
 
+//Styles Imports
 import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-import PublicNewCarContext from "../../context/CreateNewCarContext";
-import AlertContext from "../../context/StatusContext";
-import { publicNewCar } from "../../utils/fetchAPI";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import PublishOutlinedIcon from "@material-ui/icons/PublishOutlined";
 
-const useStyles = makeStyles((theme) => ({
+//Context Imports
+import PublicNewCarContext from "../../context/CreateNewCarContext";
+import AlertContext from "../../context/StatusContext";
+
+//Utils Imports
+import { publicNewCar } from "../../utils/fetchAPI";
+
+const useStyles = makeStyles({
   root: {
     display: "flex",
     justifyContent: "center",
@@ -19,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px auto",
     backgroundColor: "#36b6ff",
   },
-}));
+});
 
 const PublicButton = () => {
   const classes = useStyles();
@@ -36,7 +40,7 @@ const PublicButton = () => {
   const fetchAPI = async (e) => {
     e.preventDefault();
 
-    console.log(description);
+    //Validate if all fields are filled
     if (price <= 0 && description.trim() === "") {
       setShowAlert(true);
       setAlertInfo({
@@ -66,6 +70,8 @@ const PublicButton = () => {
 
     setIsLoading(true);
     const response = await publicNewCar(price, description);
+
+    //Case of Error
     if (!response) {
       setShowAlert(true);
       setAlertInfo({
@@ -83,6 +89,8 @@ const PublicButton = () => {
       }, 5000);
       return;
     }
+
+    console.log(response)
     setImage(response);
     setIsLoading(false);
     setShowAlert(true);

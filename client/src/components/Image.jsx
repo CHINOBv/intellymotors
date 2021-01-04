@@ -1,17 +1,23 @@
 import { useContext, useState } from "react";
 
+//Styles Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, Grid } from "@material-ui/core";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import {
+  Card,
+  Grid,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from "@material-ui/core";
 
+//Context
 import PublicNewCarContext from "../context/CreateNewCarContext";
 
-import ModalImage from "./ModalImage";
+//Components
+import ImageFullView from "./ImageFullView";
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +31,8 @@ const useStyles = makeStyles({
 
 const Image = () => {
   const [openImage, setOpenImage] = useState(false);
+  const { image } = useContext(PublicNewCarContext);
 
-  const { image, description, price } = useContext(PublicNewCarContext);
   const classes = useStyles();
 
   return (
@@ -39,7 +45,7 @@ const Image = () => {
             >
               <CardMedia
                 className={classes.media}
-                image={image}
+                image={image.image}
                 title="Contemplative Reptile"
               />
               <CardContent>
@@ -47,14 +53,14 @@ const Image = () => {
                   Descripcion
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {description}
+                  {image.description}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="textPrimary"
                   component="samp"
                 >
-                  Precio ${price}
+                  Precio ${image.price}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -67,10 +73,10 @@ const Image = () => {
                 Ver Imagen Completa
               </Button>
             </CardActions>
-            <ModalImage
+            <ImageFullView
               setOpenImage={setOpenImage}
               openImage={openImage}
-              image={image}
+              image={image.image}
             />
           </Card>
         </Grid>

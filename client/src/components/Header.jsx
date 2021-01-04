@@ -1,13 +1,14 @@
+//Core Imports
 import React from "react";
+
+//Styles Imports
 import { AppBar, Toolbar, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-//import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 
 const useStyles = makeStyles({
   barStyle: {
     backgroundColor: "#318dc3",
     width: "100%",
-    
   },
 });
 
