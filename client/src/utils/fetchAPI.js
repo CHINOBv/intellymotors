@@ -15,5 +15,6 @@ export const publicNewCar = async (priceReq, descriptionReq) => {
     .then((response) => {
       const { image, price, description } = response.data;
       return { image: URL + image, price, description };
-    }).catch(err => Promise.reject(err))
+    })
+    .catch((err) => Promise.reject(err));
 };

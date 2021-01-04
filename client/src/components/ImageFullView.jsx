@@ -12,7 +12,7 @@ const ImageFullView = ({ setOpenImage, openImage, image }) => {
   };
 
   const download = (e) => {
-//    e.preventDefault();
+    //    e.preventDefault();
     console.log(e.target.href);
     fetch(e.target.href, {
       method: "GET",
@@ -34,28 +34,28 @@ const ImageFullView = ({ setOpenImage, openImage, image }) => {
   };
 
   return (
-    <a href={image} download onClick={(e) => download(e)}>
-      <Dialog
-        fullScreen
-        open={openImage}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogContent>
+    <Dialog
+      fullScreen
+      open={openImage}
+      onClose={handleClose}
+      aria-labelledby="responsive-dialog-title"
+    >
+      <DialogContent>
+        <a href={image} download onClick={(e) => download(e)}>
           <img src={image} alt="fullview" style={{ width: "100%" }} />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant="contained"
-            autoFocus
-            onClick={handleClose}
-            color="primary"
-          >
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </a>
+        </a>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          variant="contained"
+          autoFocus
+          onClick={handleClose}
+          color="primary"
+        >
+          Cerrar
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
