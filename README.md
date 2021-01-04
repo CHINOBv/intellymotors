@@ -42,6 +42,12 @@ FrontEnd: ReactJS
 
 No suelo dejar el archivo .env con las variables de entorno, solo las deje en esta ocacion con la finalidad de que sea mas rapido probar el codigo
 
+#Nota
+En la ruta 
+```
+server/src/utils/fetchs.js
+```
+Linea #106 solo es necesaria en algunos casos cuando se tienen problemas
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
